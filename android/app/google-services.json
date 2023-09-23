@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "431161358299",
+    "project_id": "flutter-final-devill",
+    "storage_bucket": "flutter-final-devill.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431161358299:android:651a8f0a7a40a720b519fe",
+        "android_client_info": {
+          "package_name": "com.example.final_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz9qb7MLqZ9qm-L_xB-_CEJjrw88SomhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
