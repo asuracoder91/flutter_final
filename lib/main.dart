@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'constants/sizes.dart';
 import 'firebase_options.dart';
 import 'router.dart';
 
@@ -33,33 +32,48 @@ class FinalApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: ref.watch(routerProvider),
       debugShowCheckedModeBanner: false,
-      title: 'Final Project',
+      title: 'Mood Tracker',
       theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(),
+        textTheme: GoogleFonts.notoSansKrTextTheme(),
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
-        primaryColor: const Color(0xFF4E98E9),
+        primaryColor: const Color(0xFF6750A4),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color(0xFFE9435A),
         ),
+        colorScheme: const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xff6750a4),
+          onPrimary: Color(0xffc3c3d2),
+          primaryContainer: Color(0xffeaddff),
+          onPrimaryContainer: Color(0xff131214),
+          secondary: Color(0xffA69CCE),
+          onSecondary: Color(0xffffffff),
+          secondaryContainer: Color(0xFFF2F4F7),
+          onSecondaryContainer: Color(0xff131214),
+          tertiary: Color(0xff7d5260),
+          onTertiary: Color(0xffffffff),
+          tertiaryContainer: Color(0xffffd8e4),
+          onTertiaryContainer: Color(0xff141213),
+          error: Color(0xffb00020),
+          onError: Color(0xffffffff),
+          errorContainer: Color(0xfffcd8df),
+          onErrorContainer: Color(0xff141213),
+          background: Color(0xFFE8DEF8),
+          onBackground: Color(0xff090909),
+          surface: Color(0xfff9f8fb),
+          onSurface: Color(0xff090909),
+          surfaceVariant: Color(0xfff4f2f8),
+          onSurfaceVariant: Color(0xff131213),
+          outline: Color(0xff344054),
+          shadow: Color(0xff000000),
+          inverseSurface: Color(0xff141316),
+          onInverseSurface: Color(0xffede7f5),
+          inversePrimary: Color(0xff4d3c93),
+          surfaceTint: Color(0xff6750a4),
+        ),
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.black,
-          surfaceTintColor: Colors.white,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: Sizes.size18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        tabBarTheme: TabBarTheme(
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey.shade500,
-          indicatorColor: Colors.black,
-        ),
         listTileTheme: const ListTileThemeData(
           iconColor: Colors.black,
         ),
@@ -77,18 +91,6 @@ class FinalApp extends ConsumerWidget {
         splashColor: Colors.transparent,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
-        appBarTheme: AppBarTheme(
-          surfaceTintColor: Colors.grey.shade900,
-          backgroundColor: Colors.black,
-          titleTextStyle: const TextStyle(
-            color: Colors.black,
-            fontSize: Sizes.size18,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: Colors.grey.shade900,
-        ),
         primaryColor: const Color(0xFFE9435A),
         useMaterial3: true,
       ),
