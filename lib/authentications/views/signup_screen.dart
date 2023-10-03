@@ -8,6 +8,7 @@ import 'package:mood_tracker/authentications/widgets/login_form.dart';
 import 'package:mood_tracker/authentications/widgets/social_login.dart';
 import 'package:mood_tracker/authentications/widgets/social_login_dark.dart';
 import 'package:mood_tracker/constants/gaps.dart';
+import '../view_models/google_login_view_model.dart';
 import '../view_models/signup_view_model.dart';
 import '../widgets/auth_button.dart';
 
@@ -249,7 +250,8 @@ class _LoginScreenState extends ConsumerState<SignUpScreen> {
                 ),
 
                 // 로딩 중이면 로딩 표시
-                if (ref.watch(signUpProvider).isLoading) ...[
+                if (ref.watch(signUpProvider).isLoading ||
+                    ref.watch(googleLoginProvider).isLoading) ...[
                   const Center(
                     child: CircularProgressIndicator(),
                   ),

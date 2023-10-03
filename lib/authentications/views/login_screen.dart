@@ -320,7 +320,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ],
                 ),
                 // 로딩 중이면 로딩 표시
-                if (ref.watch(loginProvider).isLoading) ...[
+                if (ref.watch(loginProvider).isLoading ||
+                    ref.watch(googleLoginProvider).isLoading) ...[
                   const Center(
                     child: CircularProgressIndicator(),
                   ),
