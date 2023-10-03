@@ -42,32 +42,29 @@ class AuthenticationRepository {
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    try {
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) {
-        return null;
-      }
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-
-      // Create a new credential
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      UserCredential authResult =
-          await _firebaseAuth.signInWithCredential(credential);
-
-      return authResult;
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
+    // Trigger the authentication flow
+    print("sign in with google step 1");
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) {
+      return null;
     }
-    return null;
+    print("sign in with google step 2");
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    print("sign in with google step 3");
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    print("sign in with google step 4");
+    UserCredential authResult =
+        await _firebaseAuth.signInWithCredential(credential);
+
+    return authResult;
   }
 
   Future<UserCredential?> signInWithApple() async {

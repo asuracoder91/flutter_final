@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mood_tracker/authentications/repos/authentication_repo.dart';
+import 'package:mood_tracker/authentications/view_models/google_login_view_model.dart';
 import 'package:mood_tracker/authentications/views/signup_screen.dart';
 import 'package:mood_tracker/authentications/widgets/login_form.dart';
 import 'package:mood_tracker/authentications/widgets/social_login.dart';
@@ -140,6 +141,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
+    // error message handling provider monitor
+    final errorMessage = ref.watch(errorMessageProvider);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(), // 화면 터치하면 키보드 내려감
       child: Scaffold(
@@ -212,11 +216,32 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   }
                                 },
                               ),
+                              Gaps.v6,
+                              Visibility(
+                                  visible: errorMessage != null &&
+                                      errorMessage.isNotEmpty,
+                                  maintainSize: true,
+                                  maintainAnimation: true,
+                                  maintainState: true,
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Text(
+                                      errorMessage ?? "",
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        fontSize: 14,
+                                        letterSpacing: -0.3,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  )),
                             ],
                           ),
                         ),
                       ),
-                      Gaps.v56,
+                      Gaps.v20,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: GestureDetector(
@@ -242,13 +267,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       Gaps.v64,
                       // 구글 로그인 버튼
-                      SizedBox(
-                        width: screenSize.width * 0.7,
-                        child: SocialLogin(
-                          text: "Sign In with Google",
-                          icon: SvgPicture.asset(
-                              "assets/icons/icons8-google.svg",
-                              width: 28),
+                      GestureDetector(
+                        onTap: () => ref
+                            .read(googleLoginProvider.notifier)
+                            .googleLogin(context),
+                        child: SizedBox(
+                          width: screenSize.width * 0.7,
+                          child: SocialLogin(
+                            text: "Sign In with Google",
+                            icon: SvgPicture.asset(
+                                "assets/icons/icons8-google.svg",
+                                width: 28),
+                          ),
                         ),
                       ),
                       Gaps.v10,

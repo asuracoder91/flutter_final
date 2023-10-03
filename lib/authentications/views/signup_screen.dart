@@ -88,7 +88,8 @@ class _LoginScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-
+    // error message handling provider monitor
+    final errorMessage = ref.watch(signUpErrorMessageProvider);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(), // 화면 터치하면 키보드 내려감
       child: Scaffold(
@@ -160,11 +161,32 @@ class _LoginScreenState extends ConsumerState<SignUpScreen> {
                                   }
                                 },
                               ),
+                              Gaps.v6,
+                              Visibility(
+                                  visible: errorMessage != null &&
+                                      errorMessage.isNotEmpty,
+                                  maintainSize: true,
+                                  maintainAnimation: true,
+                                  maintainState: true,
+                                  child: SizedBox(
+                                    height: 40,
+                                    child: Text(
+                                      errorMessage ?? "",
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        fontSize: 14,
+                                        letterSpacing: -0.3,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  )),
                             ],
                           ),
                         ),
                       ),
-                      Gaps.v56,
+                      Gaps.v20,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: GestureDetector(

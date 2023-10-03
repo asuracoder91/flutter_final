@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../utils.dart';
@@ -30,8 +31,16 @@ class SignUpViewModel extends AsyncNotifier<void> {
       await users.createProfile(userCredential);
     });
     if (state.hasError) {
-      if (!context.mounted) return;
-      showFirebaseErrorSnack(context, state.error);
+      if (state.error is FirebaseAuthException) {
+        FirebaseAuthException firebaseError =
+            state.error as FirebaseAuthException;
+        String msg = mapFirebaseErrorMessages(firebaseError.code);
+
+        ref.container.read(signUpErrorMessageProvider.notifier).state = msg;
+      } else {
+        ref.container.read(signUpErrorMessageProvider.notifier).state =
+            "알 수 없는 오류가 발생했습니다.";
+      }
     }
   }
 }
@@ -39,3 +48,5 @@ class SignUpViewModel extends AsyncNotifier<void> {
 final signUpProvider = AsyncNotifierProvider<SignUpViewModel, void>(
   () => SignUpViewModel(),
 );
+
+final signUpErrorMessageProvider = StateProvider<String?>((ref) => null);
